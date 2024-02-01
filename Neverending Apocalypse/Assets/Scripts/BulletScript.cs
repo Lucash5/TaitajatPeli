@@ -20,6 +20,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Koodi joka vastaa luodin rekisteröitymisestä zombiin ja rekisteröimälllä  vashinkoa
         if (collision.gameObject.name == "Zombie" && hit == false)
         {
             hit = true;

@@ -17,10 +17,14 @@ public class DifficultyIncreaseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //koodi joka muokkaa kikok ajan vaikeustasotekstin tekstiä
         difficulty.text = "Difficulty Multiplier : " + difficultymultiplier.ToString() + "x";
+
+
 
         if ( cooldown  == false)
         {
+            // koodi joka laukaiseee iEnumeraattorin joka vastaa vaikeustason nostamisesta joka sekuntti
             StartCoroutine(counting());
         }
     }

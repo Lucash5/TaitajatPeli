@@ -20,6 +20,7 @@ public class WalkSpeedBoost : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            // koodi joka kutsutaan kun pelaaja osuu nopeusnboosti esineeseen ja se lis‰‰ hetkeksi pelaajan nopeuteen 50% alkuper‰isest‰ nopeudesta
             float speed = collision.gameObject.GetComponent<PlayerMovement>().speed;
             collision.gameObject.GetComponentInChildren<PlayerMovement>().changedamage(speed + speed * 0.5f, 30f);
             Destroy(gameObject);

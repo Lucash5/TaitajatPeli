@@ -10,6 +10,7 @@ public class ZombieBehaviourScript : MonoBehaviour
     public float damage;
     public float health;
     public Transform player;
+    bool cooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class ZombieBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Koodi joka vastaa zombin käännöksestä ja liikkumisesta valittuuun suuntaan
         Vector2 direction = new Vector2(transform.position.x - player.position.x, transform.position.y - player.position.y);
        
         
@@ -30,6 +32,7 @@ public class ZombieBehaviourScript : MonoBehaviour
 
     public void takingdamage(float damage)
     {
+        // koodi joka vastaa vahingon rekisteröimisestä zombiin
         health -= damage;
         Debug.Log(health);
         if (health <= 0)
@@ -39,6 +42,23 @@ public class ZombieBehaviourScript : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // koodi joka vastaa zombin aiheuttamasta vahingosta pelaajaan
+        if (collision.gameObject.name == "Player" && cooldown == false)
+            StartCoroutine(attackcooldown());
+        {
+            collision.gameObject.GetComponent<PlayerMovement>().takedamage(damage);
+        }
+    }
+
+
+    IEnumerator attackcooldown()
+    {
+        // koodi joka vastaa viiveen luo9misesta ettei zombie voi lyödä tuhat kertaa sekunnisssa
+        cooldown = true;
+        yield return new WaitForSeconds(1);
+        cooldown = false;
+    }
 
 }

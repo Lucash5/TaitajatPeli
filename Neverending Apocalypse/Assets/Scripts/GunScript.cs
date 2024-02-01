@@ -24,12 +24,14 @@ public class GunScript : MonoBehaviour
     {
         if(Input.GetMouseButton(0) && cooldown == false)
         {
+            // koodi joka kutsuu Ienumeraatto9rin kun hiiren n‰pp‰int‰ painetaan
             StartCoroutine(firingbullet());
         }
     }
 
     IEnumerator firingbullet()
     {
+        // Koodi joka luo luodin ja luo siihen voimaa
         cooldown = true;
         GameObject createdbullet = Instantiate(bullet);
         createdbullet.transform.position = transform.position;
@@ -48,6 +50,7 @@ public class GunScript : MonoBehaviour
 
     public void changedamage(float damage, float time)
     {
+        //koodi joka vaihtaa luodin vahinkomÂ‰‰r‰‰‰
         StartCoroutine(timesup(time));
         bulletdamage = damage;
     }
@@ -57,21 +60,25 @@ public class GunScript : MonoBehaviour
     }
     IEnumerator timesup(float time)
     {
+        //koodi joka vastaa power uppien loppumisesta
         float olddmg = bulletdamage;
         yield return new WaitForSeconds(time);
         bulletdamage = olddmg;
     }
     public void changefirerate(float rate)
     {
+        // koodi joka vaihtaa tulitusnopeutta
         firerate = rate;
     }
     public void changeweapon(string gun)
     {
+        // koodi joka vastaa aseencaihtamiesta
         foreach (Sprite guntype in guns)
         {
             if (guntype.name == gun)
             {
-                gameObject.GetComponent<SpriteRenderer>().sprite = guntype;
+                Debug.Log(guntype.name);
+                gameObject.GetComponentInParent<SpriteRenderer>().sprite = guntype;
             }
         }
     }

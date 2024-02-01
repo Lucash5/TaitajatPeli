@@ -18,6 +18,7 @@ public class DMGBoostScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // koodi joka lis‰‰ pelaajan aiheuttamaa vahinkoa zombeihin
         if (collision.gameObject.name == "Player")
         {
             float dmg = collision.gameObject.GetComponentInChildren<GunScript>().bulletdamage;

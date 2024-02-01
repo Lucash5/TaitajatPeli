@@ -8,38 +8,42 @@ public class ZombieSpawnScript : MonoBehaviour
 {
     public Transform player;
     public float spawnspeed;
+    public float startspawnspeed;
     bool spawncooldown;
     public Transform[] spawnarea;
     public GameObject zombie;
     public float difficulty;
     public float health;
     public float damage;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        // aktivoidaaan Ienumeraattori 
+        StartCoroutine(increase());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        float number = MathF.Pow(player.position.x - transform.position.x, 2) + MathF.Pow(player.position.y - transform.position.y, 2);
-        float distancefromplayer = MathF.Sqrt(number);
-        if (spawncooldown == false && distancefromplayer < 20)
+        // koodi joka vastaa zombie spawnaamisesta. 
+  
+        if (spawncooldown == false)
         {
             StartCoroutine(spawnzombie());
         }
-        Debug.Log(distancefromplayer);
         health = 100 * difficulty;
         damage = 15 * difficulty;
-        spawnspeed = 2 / difficulty;
+        spawnspeed = startspawnspeed / difficulty;
 
-      
+
+        
     }
 
     IEnumerator spawnzombie()
     {
+        //koodissa kloonataan zombi objekti ja kloonille annetaan arvoja
         spawncooldown = true;
         yield return new WaitForSeconds(spawnspeed);
         GameObject spawnedzombie =  Instantiate(zombie);
@@ -49,5 +53,15 @@ public class ZombieSpawnScript : MonoBehaviour
         spawnedzombie.name = "Zombie";
         spawnedzombie.GetComponent<ZombieBehaviourScript>().health = health;
         spawncooldown = false;
+    }
+
+
+    IEnumerator increase()
+    {
+        //spawnaus nopeus kiihtyy
+        yield return new WaitForSeconds(90);
+        startspawnspeed = 4;
+        yield return new WaitForSeconds(90);
+        startspawnspeed = 2;
     }
 }

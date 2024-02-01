@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class VendingMachineScript : MonoBehaviour
 {
-    GameObject player;
+   
     public Image shop;
     public Button[] guns;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,27 +27,30 @@ public class VendingMachineScript : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            player = collision.gameObject;
+            
             shop.gameObject.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // ui joka avataan ku7n pelaaja k‰velee masiinan luo
         if(collision.gameObject.name == "Player")
         {
             shop.gameObject.SetActive(false);
         }
     }
+    // Kolme metodia joilla on kaikilla oma ase ja ominaisuutensa jotka l‰hetet‰‰n pelaajan aseen vaihtamiseksi
     private void option1()
     {
+        
         if (player.GetComponent<PointsScript>().points >= 500)
         {
 
         player.GetComponent<PointsScript>().removepoints(500);
-        player.GetComponent<GunScript>().changeweapon("Pistol");
-        player.GetComponent<GunScript>().changefirerate(0.3f);
-        player.GetComponent<GunScript>().changeweapondamage(19f);
+        player.GetComponentInChildren<GunScript>().changeweapon("PISTOL");
+        player.GetComponentInChildren<GunScript>().changefirerate(0.3f);
+        player.GetComponentInChildren<GunScript>().changeweapondamage(19f);
 
         }
     }
@@ -55,9 +59,9 @@ public class VendingMachineScript : MonoBehaviour
         if (player.GetComponent<PointsScript>().points >= 2250)
         {
             player.GetComponent<PointsScript>().removepoints(2250);
-            player.GetComponent<GunScript>().changeweapon("AK47");
-            player.GetComponent<GunScript>().changefirerate(0.1f);
-            player.GetComponent<GunScript>().changeweapondamage(20f);
+            player.GetComponentInChildren<GunScript>().changeweapon("AK47");
+            player.GetComponentInChildren<GunScript>().changefirerate(0.1f);
+            player.GetComponentInChildren<GunScript>().changeweapondamage(20f);
         }
     }
     private void option3()
@@ -65,9 +69,9 @@ public class VendingMachineScript : MonoBehaviour
             if (player.GetComponent<PointsScript>().points >= 6000)
             {
                 player.GetComponent<PointsScript>().removepoints(6000);
-                player.GetComponent<GunScript>().changeweapon("LMG");
-                player.GetComponent<GunScript>().changefirerate(0.05f);
-                player.GetComponent<GunScript>().changeweapondamage(26f);
+                player.GetComponentInChildren<GunScript>().changeweapon("LMG");
+                player.GetComponentInChildren<GunScript>().changefirerate(0.075f);
+                player.GetComponentInChildren<GunScript>().changeweapondamage(25f);
             }
     }
 }

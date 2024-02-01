@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public TMP_Text Healthtext;
     //Rigidbody komponentti joka vastaa pelaajan fyysisestä liikkumisesta ja käyttäytymisestä
     Rigidbody2D rb;
     //Desimaaliluku muuttuja jota voi vaihdella editorissa ja joka vastaa pelaajan liikkumisnopeudesta
     public float speed;
-
+    public float health = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // kamera seuraa pelaajan positiota
+        // hiiren positiolla lasketaan sijainti johon pelaaja katsoo
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
 
@@ -41,5 +46,15 @@ public class PlayerMovement : MonoBehaviour
         float oldspeed = speed;
         yield return new WaitForSeconds(time);
         speed = oldspeed;
+    }
+
+    public void takedamage(float damagetaken)
+    {
+        health -= damagetaken;
+        Healthtext.text = "Health : " + health.ToString();
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }
