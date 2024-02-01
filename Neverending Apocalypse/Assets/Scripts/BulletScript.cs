@@ -26,5 +26,9 @@ public class BulletScript : MonoBehaviour
             collision.gameObject.GetComponent<ZombieBehaviourScript>().takingdamage(bulletdamage);
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -40,20 +40,34 @@ public class VendingMachineScript : MonoBehaviour
     }
     private void option1()
     {
+        if (player.GetComponent<PointsScript>().points >= 500)
+        {
+
         player.GetComponent<PointsScript>().removepoints(500);
         player.GetComponent<GunScript>().changeweapon("Pistol");
+        player.GetComponent<GunScript>().changefirerate(0.3f);
+        player.GetComponent<GunScript>().changeweapondamage(19f);
 
+        }
     }
     private void option2()
     {
-        player.GetComponent<PointsScript>().removepoints(2250);
-        player.GetComponent<GunScript>().changeweapon("AK47");
-
+        if (player.GetComponent<PointsScript>().points >= 2250)
+        {
+            player.GetComponent<PointsScript>().removepoints(2250);
+            player.GetComponent<GunScript>().changeweapon("AK47");
+            player.GetComponent<GunScript>().changefirerate(0.1f);
+            player.GetComponent<GunScript>().changeweapondamage(20f);
+        }
     }
     private void option3()
     {
-        player.GetComponent<PointsScript>().removepoints(6000);
-        player.GetComponent<GunScript>().changeweapon("LMG");
-
+            if (player.GetComponent<PointsScript>().points >= 6000)
+            {
+                player.GetComponent<PointsScript>().removepoints(6000);
+                player.GetComponent<GunScript>().changeweapon("LMG");
+                player.GetComponent<GunScript>().changefirerate(0.05f);
+                player.GetComponent<GunScript>().changeweapondamage(26f);
+            }
     }
 }

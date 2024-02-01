@@ -51,6 +51,10 @@ public class GunScript : MonoBehaviour
         StartCoroutine(timesup(time));
         bulletdamage = damage;
     }
+    public void changeweapondamage(float damage)
+    {
+        bulletdamage = damage;
+    }
     IEnumerator timesup(float time)
     {
         float olddmg = bulletdamage;
