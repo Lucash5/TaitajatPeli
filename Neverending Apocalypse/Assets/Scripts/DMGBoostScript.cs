@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class DMGBoostScript : MonoBehaviour
 {
-    bool hit;
     // Start is called before the first frame update
-    public float bulletdamage;
     void Start()
     {
         
@@ -20,10 +18,10 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Zombie" && hit == false)
+        if (collision.gameObject.name == "Player")
         {
-            hit = true;
-            collision.gameObject.GetComponent<ZombieBehaviourScript>().takingdamage(bulletdamage);
+            float dmg = collision.gameObject.GetComponentInChildren<GunScript>().bulletdamage;
+            collision.gameObject.GetComponentInChildren<GunScript>().changedamage(dmg + dmg*0.5f, 30f);
             Destroy(gameObject);
         }
     }

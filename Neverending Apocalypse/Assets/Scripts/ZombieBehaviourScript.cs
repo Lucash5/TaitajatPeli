@@ -34,10 +34,11 @@ public class ZombieBehaviourScript : MonoBehaviour
         Debug.Log(health);
         if (health <= 0)
         {
+            player.gameObject.GetComponent<PointsScript>().addpoints(50);
             Destroy(gameObject);
         }
     }
 
-  
+    
 
 }

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
 
         Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -29,5 +29,17 @@ public class PlayerMovement : MonoBehaviour
         transform.right = direction * -1;
 
 
+    }
+
+    public void changedamage(float newspeed, float time)
+    {
+        StartCoroutine(timesup(time));
+        speed = newspeed;
+    }
+    IEnumerator timesup(float time)
+    {
+        float oldspeed = speed;
+        yield return new WaitForSeconds(time);
+        speed = oldspeed;
     }
 }

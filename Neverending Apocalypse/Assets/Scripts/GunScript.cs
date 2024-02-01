@@ -12,6 +12,7 @@ public class GunScript : MonoBehaviour
     public float bulletdamage;
     public float firerate;
     public Transform bulletsfolder;
+    public Sprite[] guns;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,13 +46,29 @@ public class GunScript : MonoBehaviour
 
     }
 
-    public void changedamage(float damage)
+    public void changedamage(float damage, float time)
     {
+        StartCoroutine(timesup(time));
         bulletdamage = damage;
     }
-
+    IEnumerator timesup(float time)
+    {
+        float olddmg = bulletdamage;
+        yield return new WaitForSeconds(time);
+        bulletdamage = olddmg;
+    }
     public void changefirerate(float rate)
     {
         firerate = rate;
+    }
+    public void changeweapon(string gun)
+    {
+        foreach (Sprite guntype in guns)
+        {
+            if (guntype.name == gun)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = guntype;
+            }
+        }
     }
 }
